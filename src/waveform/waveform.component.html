@@ -1,0 +1,61 @@
+<div class="song_palyer mx-5  d-flex flex-column">
+  <div class="d-flex justify-content-between">
+    <div class="d-flex gap-3 align-items-center">
+      <div class="song__paly_action d-flex cursor">
+        <div class="song__bg_cover">
+          <img [src]="musicInfo?.trackImage" alt="" />
+        </div>
+
+        <div *ngIf="loading" class="d-flex justify-content-center">
+          <div class="spinner-border" style="width: 20px; height: 20px;">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+        <div *ngIf="!loading">
+          <div
+            class="song_action_items"
+            (click)="playPause()"
+            [ngStyle]="{
+              cursor: 'pointer'
+            }"
+          >
+            <i
+              class="fa fa-play"
+              aria-hidden="true"
+              *ngIf="!wave?.isPlaying()"
+            ></i>
+            <i
+              class="fa fa-pause"
+              *ngIf="wave?.isPlaying()"
+              aria-hidden="true"
+            ></i>
+          </div>
+        </div>
+      </div>
+      <div class="song_name_artist text-center gap-1">
+        <span>{{ musicInfo?.trackname }}</span>
+        <span>{{ musicInfo?.artistname }}</span>
+      </div>
+    </div>
+
+    <div class="music_fav_icons d-flex gap-3">
+      <p>
+        <i class="far fa-heart"></i>
+      </p>
+      <p><i class="fas fa-plus"></i></p>
+      <p class="download_icon">
+        <i
+          class="fa fa-download"
+          aria-hidden="true"
+          data-toggle="modal"
+          data-target="#downloadPopup"
+        ></i>
+      </p>
+    </div>
+  </div>
+  <div>
+    <div class="w-100 my-1">
+      <div #player></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="d-flex flex-column h-100">
+  <div class="text-center bg-dark text-white border border-primary">
+    <h3>Music Player</h3>
+    <span class="badge">Built using Angular 13 & Wavesurfer.js</span>
+  </div>
+  <div class="flex-grow-1 overflow-auto">
+    <div
+      *ngFor="let m of musics; let i = index"
+      class="rounded my-1 mx-2 bg-dark text-white border border-dark"
+    >
+      <app-waveform [musicInfo]="m" [play]="play[i]" (pause)="onPause()">
+      </app-waveform>
+    </div>
+  </div>
+
+  <div class="border border-primary">
+    <div class="card bg-dark text-white">
+      <div [ngStyle]="{ 'z-index': 0 }" class="card-img" #mainWaves></div>
+      <div class="card-img-overlay">
+        <div class="d-flex gap-1 shadow-lg p-3 mb-5 rounded">
+          <div
+            class="d-flex"
+            [ngStyle]="{
+              cursor: !currentMusicInfo?.trackname ? 'no-drop' : 'pointer'
+            }"
+          >
+            <div class="song_action_items p-1" (click)="playPause()">
+              <i class="fa fa-play" *ngIf="!playing" aria-hidden="true"></i>
+              <i class="fa fa-pause" *ngIf="playing" aria-hidden="true"></i>
+            </div>
+          </div>
+          <span>{{ currentMusicInfo?.trackname || 'Play a track' }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
